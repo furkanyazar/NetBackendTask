@@ -8,12 +8,13 @@ public class Entity<TId> : IEntityTimestamps
     public DateTime? UpdatedDate { get; set; }
     public DateTime? DeletedDate { get; set; }
 
-    public Entity() { }
+    public Entity()
+    {
+        Id = default!;
+    }
 
-    public Entity(TId id, bool status)
-        : this()
+    public Entity(TId id)
     {
         Id = id;
-        Status = status;
     }
 }
