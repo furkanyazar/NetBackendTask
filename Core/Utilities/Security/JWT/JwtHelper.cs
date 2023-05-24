@@ -24,12 +24,12 @@ public class JwtHelper : ITokenHelper
             ?? throw new NullReferenceException($"\"{configurationSection}\" section cannot found in configuration.");
     }
 
-    public AccessToken CreateToken(User user)
+    public AccessToken CreateToken(User user, IList<OperationClaim> operationClaims)
     {
         _accessTokenExpiration = DateTime.Now.AddMinutes(_tokenOptions.AccessTokenExpiration);
         SecurityKey securityKey = SecurityKeyHelper.CreateSecurityKey(_tokenOptions.SecurityKey);
         SigningCredentials signingCredentials = SigningCredentialsHelper.CreateSigningCredentials(securityKey);
-        JwtSecurityToken jwt = CreateJwtSecurityToken(_tokenOptions, user, signingCredentials);
+        JwtSecurityToken jwt = CreateJwtSecurityToken(_tokenOptions, user, signingCredentials, operationClaims);
         JwtSecurityTokenHandler jwtSecurityTokenHandler = new JwtSecurityTokenHandler();
         string token = jwtSecurityTokenHandler.WriteToken(jwt);
         return new AccessToken { Token = token, Expiration = _accessTokenExpiration, };
@@ -52,7 +52,8 @@ public class JwtHelper : ITokenHelper
     public JwtSecurityToken CreateJwtSecurityToken(
         TokenOptions tokenOptions,
         User user,
-        SigningCredentials signingCredentials
+        SigningCredentials signingCredentials,
+        IList<OperationClaim> operationClaims
     )
     {
         JwtSecurityToken jwtSecurityToken =
@@ -61,19 +62,19 @@ public class JwtHelper : ITokenHelper
                 audience: tokenOptions.Audience,
                 expires: _accessTokenExpiration,
                 notBefore: DateTime.Now,
-                claims: SetClaims(user),
+                claims: SetClaims(user, operationClaims),
                 signingCredentials: signingCredentials
             );
         return jwtSecurityToken;
     }
 
-    private IEnumerable<Claim> SetClaims(User user)
+    private IEnumerable<Claim> SetClaims(User user, IList<OperationClaim> operationClaims)
     {
         List<Claim> claims = new();
         claims.AddNameIdentifier(user.Id.ToString());
         claims.AddEmail(user.Email);
         claims.AddName($"{user.FirstName} {user.LastName}");
-        claims.AddRoles(user.UserOperationClaims.Select(c => c.OperationClaim.Value).ToArray());
+        claims.AddRoles(operationClaims.Select(c => c.Value).ToArray());
         return claims;
     }
 

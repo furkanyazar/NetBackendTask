@@ -1,3 +1,5 @@
+using DataAccess.Abstract;
+using DataAccess.Concrete;
 using DataAccess.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -14,6 +16,11 @@ public static class DataAccessServiceRegistration
     {
         string conString = configuration.GetConnectionString("BaseDb");
         services.AddDbContext<BaseDbContext>(opt => opt.UseMySql(conString, ServerVersion.AutoDetect(conString)));
+
+        services.AddScoped<IUserDal, EfUserDal>();
+        services.AddScoped<IOperationClaimDal, EfOperationClaimDal>();
+        services.AddScoped<IUserOperationClaimDal, EfUserOperationClaimDal>();
+        services.AddScoped<IRefreshTokenDal, EfRefreshTokenDal>();
 
         return services;
     }

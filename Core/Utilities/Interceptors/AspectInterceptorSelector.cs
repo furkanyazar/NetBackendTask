@@ -1,7 +1,5 @@
 ﻿using Castle.DynamicProxy;
-using Core.Aspects.Exception;
 using Core.Aspects.Performance;
-using Core.CrossCuttingConcerns.Logging.Serilog.Loggers;
 using System.Reflection;
 
 namespace Core.Utilities.Interceptors;
@@ -18,7 +16,6 @@ public class AspectInterceptorSelector : IInterceptorSelector
             .GetCustomAttributes<MethodInterceptionBaseAttribute>(true);
 
         classAttributes.AddRange(methodAttributes);
-        classAttributes.Add(new ExceptionLogAspect(typeof(FileLogger)));
         classAttributes.Add(new PerformanceAspect(5));
 
         return classAttributes.OrderBy(c => c.Priority).ToArray();

@@ -32,6 +32,15 @@ public class EfRepositoryBase<TEntity, TEntityId, TContext>
         return entity;
     }
 
+    public async Task<ICollection<TEntity>> AddRangeAsync(ICollection<TEntity> entities)
+    {
+        foreach (TEntity entity in entities)
+            entity.CreatedDate = DateTime.UtcNow;
+        await Context.AddRangeAsync(entities);
+        await Context.SaveChangesAsync();
+        return entities;
+    }
+
     public async Task<TEntity> UpdateAsync(TEntity entity)
     {
         entity.UpdatedDate = DateTime.UtcNow;
@@ -40,11 +49,27 @@ public class EfRepositoryBase<TEntity, TEntityId, TContext>
         return entity;
     }
 
+    public async Task<ICollection<TEntity>> UpdateRangeAsync(ICollection<TEntity> entities)
+    {
+        foreach (TEntity entity in entities)
+            entity.UpdatedDate = DateTime.UtcNow;
+        Context.UpdateRange(entities);
+        await Context.SaveChangesAsync();
+        return entities;
+    }
+
     public async Task<TEntity> DeleteAsync(TEntity entity, bool permanent = false)
     {
         await SetEntityAsDeletedAsync(entity, permanent);
         await Context.SaveChangesAsync();
         return entity;
+    }
+
+    public async Task<ICollection<TEntity>> DeleteRangeAsync(ICollection<TEntity> entities, bool permanent = false)
+    {
+        await SetEntityAsDeletedAsync(entities, permanent);
+        await Context.SaveChangesAsync();
+        return entities;
     }
 
     public async Task<IPaginate<TEntity>> GetListAsync(
@@ -117,6 +142,15 @@ public class EfRepositoryBase<TEntity, TEntityId, TContext>
         return entity;
     }
 
+    public ICollection<TEntity> AddRange(ICollection<TEntity> entities)
+    {
+        foreach (TEntity entity in entities)
+            entity.CreatedDate = DateTime.UtcNow;
+        Context.AddRange(entities);
+        Context.SaveChanges();
+        return entities;
+    }
+
     public TEntity Update(TEntity entity)
     {
         entity.UpdatedDate = DateTime.UtcNow;
@@ -125,11 +159,27 @@ public class EfRepositoryBase<TEntity, TEntityId, TContext>
         return entity;
     }
 
+    public ICollection<TEntity> UpdateRange(ICollection<TEntity> entities)
+    {
+        foreach (TEntity entity in entities)
+            entity.UpdatedDate = DateTime.UtcNow;
+        Context.UpdateRange(entities);
+        Context.SaveChanges();
+        return entities;
+    }
+
     public TEntity Delete(TEntity entity, bool permanent = false)
     {
         SetEntityAsDeleted(entity, permanent);
         Context.SaveChanges();
         return entity;
+    }
+
+    public ICollection<TEntity> DeleteRange(ICollection<TEntity> entities, bool permanent = false)
+    {
+        SetEntityAsDeleted(entities, permanent);
+        Context.SaveChanges();
+        return entities;
     }
 
     public TEntity? Get(

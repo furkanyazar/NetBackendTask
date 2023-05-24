@@ -35,8 +35,9 @@ public interface IAsyncRepository<TEntity, TEntityId> : IQuery<TEntity>
     );
 
     Task<TEntity> AddAsync(TEntity entity);
-
+    Task<ICollection<TEntity>> AddRangeAsync(ICollection<TEntity> entity);
     Task<TEntity> UpdateAsync(TEntity entity);
-
+    Task<ICollection<TEntity>> UpdateRangeAsync(ICollection<TEntity> entity);
     Task<TEntity> DeleteAsync(TEntity entity, bool permanent = false);
+    Task<ICollection<TEntity>> DeleteRangeAsync(ICollection<TEntity> entity, bool permanent = false);
 }
