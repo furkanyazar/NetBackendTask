@@ -16,44 +16,39 @@ public class AuthController : BaseController
     private readonly IUserService _userService;
     private readonly IRefreshTokenService _refreshTokenService;
     private readonly RefreshTokenBusinessRules _refreshTokenBusinessRules;
+    private readonly IUserOperationClaimService _userOperationClaimService;
 
     public AuthController(
         IAuthService authService,
         IUserService userService,
         IRefreshTokenService refreshTokenService,
-        RefreshTokenBusinessRules refreshTokenBusinessRules
+        RefreshTokenBusinessRules refreshTokenBusinessRules,
+        IUserOperationClaimService userOperationClaimService
     )
     {
         _authService = authService;
         _userService = userService;
         _refreshTokenService = refreshTokenService;
         _refreshTokenBusinessRules = refreshTokenBusinessRules;
+        _userOperationClaimService = userOperationClaimService;
     }
 
     [HttpPost("[action]")]
     public async Task<IActionResult> Login([FromBody] UserLoginDto userLoginDto)
     {
-        User? loggedUser = await _authService.LoginAsync(userLoginDto);
-        if (loggedUser is null)
-            return BadRequest(loggedUser);
-
+        User loggedUser = await _authService.LoginAsync(userLoginDto);
         AccessToken createdAccessToken = await _authService.CreateAccessTokenAsync(loggedUser);
         RefreshToken createdRefreshToken = await _authService.CreateRefreshTokenAsync(loggedUser, getIpAddress());
         RefreshToken addedRefreshToken = await _refreshTokenService.AddAsync(createdRefreshToken);
         setRefreshTokenToCookie(addedRefreshToken);
-
         await _refreshTokenService.DeleteOldsAsync(loggedUser.Id);
-
         return Ok(createdAccessToken);
     }
 
     [HttpPost("[action]")]
     public async Task<IActionResult> RefreshToken()
     {
-        RefreshToken? refreshToken = await _refreshTokenService.GetByTokenAsync(getRefreshTokenFromCookies());
-        if (refreshToken is null)
-            return BadRequest(refreshToken);
-
+        RefreshToken refreshToken = await _refreshTokenService.GetByTokenAsync(getRefreshTokenFromCookies());
         if (refreshToken.Revoked is not null)
             await _refreshTokenService.RevokeDescendantsAsync(
                 refreshToken,
@@ -62,34 +57,24 @@ public class AuthController : BaseController
             );
 
         await _refreshTokenBusinessRules.RefreshTokenShouldBeActive(refreshToken);
-
-        User? user = await _userService.GetByIdAsync(refreshToken.UserId);
-        if (user is null)
-            return BadRequest(user);
-
+        User user = await _userService.GetByIdAsync(refreshToken.UserId);
         RefreshToken newRefreshToken = await _refreshTokenService.RotateAsync(user: user, refreshToken, getIpAddress());
         RefreshToken addedRefreshToken = await _refreshTokenService.AddAsync(newRefreshToken);
         setRefreshTokenToCookie(addedRefreshToken);
-
         await _refreshTokenService.DeleteOldsAsync(user.Id);
-
         AccessToken createdAccessToken = await _authService.CreateAccessTokenAsync(user);
-
         return Ok(createdAccessToken);
     }
 
     [HttpPost("[action]")]
     public async Task<IActionResult> Register([FromBody] UserRegisterDto userRegisterDto)
     {
-        User? registeredUser = await _authService.RegisterAsync(userRegisterDto);
-        if (registeredUser is null)
-            return BadRequest(registeredUser);
-
+        User registeredUser = await _authService.RegisterAsync(userRegisterDto);
+        await _userOperationClaimService.AddByRegisteredUser(registeredUser.Id);
         AccessToken createdAccessToken = await _authService.CreateAccessTokenAsync(registeredUser);
         RefreshToken createdRefreshToken = await _authService.CreateRefreshTokenAsync(registeredUser, getIpAddress());
         RefreshToken addedRefreshToken = await _refreshTokenService.AddAsync(createdRefreshToken);
         setRefreshTokenToCookie(addedRefreshToken);
-
         return Ok(createdAccessToken);
     }
 
@@ -98,11 +83,9 @@ public class AuthController : BaseController
         [FromBody(EmptyBodyBehavior = EmptyBodyBehavior.Allow)] string? refreshToken
     )
     {
-        RefreshToken? refreshTokenToCheck = await _refreshTokenService.GetByTokenAsync(
+        RefreshToken refreshTokenToCheck = await _refreshTokenService.GetByTokenAsync(
             refreshToken ?? getRefreshTokenFromCookies()
         );
-        if (refreshTokenToCheck is null)
-            return BadRequest(refreshTokenToCheck);
 
         await _refreshTokenService.RevokeAsync(
             refreshToken: refreshTokenToCheck,

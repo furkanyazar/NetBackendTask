@@ -57,11 +57,11 @@ public class RefreshTokenManager : IRefreshTokenService
         await _refreshTokenDal.DeleteRangeAsync(refreshTokens);
     }
 
-    public async Task<RefreshToken?> GetByTokenAsync(string token)
+    public async Task<RefreshToken> GetByTokenAsync(string token)
     {
         RefreshToken? refreshToken = await _refreshTokenDal.GetAsync(c => c.Token == token);
         await _refreshTokenBusinessRules.RefreshTokenShouldBeExistsWhenSelected(refreshToken);
-        return refreshToken;
+        return refreshToken!;
     }
 
     public async Task RevokeAsync(

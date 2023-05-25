@@ -47,6 +47,7 @@ public class AuthManager : IAuthService
                     }
             )
             .ToListAsync();
+        operationClaims.Add(new() { Value = "logged" });
 
         AccessToken accessToken = _tokenHelper.CreateToken(user, operationClaims);
         return accessToken;

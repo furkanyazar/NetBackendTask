@@ -6,7 +6,7 @@ public interface IRefreshTokenService
 {
     public Task<RefreshToken> AddAsync(RefreshToken refreshToken);
     public Task DeleteOldsAsync(int userId);
-    public Task<RefreshToken?> GetByTokenAsync(string token);
+    public Task<RefreshToken> GetByTokenAsync(string token);
     public Task RevokeDescendantsAsync(RefreshToken refreshToken, string ipAddress, string reason);
     public Task RevokeAsync(
         RefreshToken refreshToken,
