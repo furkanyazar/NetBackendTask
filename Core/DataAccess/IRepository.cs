@@ -1,4 +1,5 @@
-﻿using Core.DataAccess.Paging;
+﻿using Core.DataAccess.Dynamic;
+using Core.DataAccess.Paging;
 using Core.Entities.Abstract;
 using Microsoft.EntityFrameworkCore.Query;
 using System.Linq.Expressions;
@@ -21,6 +22,16 @@ public interface IRepository<TEntity, TEntityId> : IQuery<TEntity>
         Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include = null,
         int index = 0,
         int size = 0,
+        bool withDeleted = false,
+        bool enableTracking = true
+    );
+
+    IPaginate<TEntity> GetListByDynamic(
+        DynamicQuery dynamic,
+        Expression<Func<TEntity, bool>>? predicate = null,
+        Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include = null,
+        int index = 0,
+        int size = 10,
         bool withDeleted = false,
         bool enableTracking = true
     );

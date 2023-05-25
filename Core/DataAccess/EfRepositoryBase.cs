@@ -1,4 +1,5 @@
-﻿using Core.DataAccess.Paging;
+﻿using Core.DataAccess.Dynamic;
+using Core.DataAccess.Paging;
 using Core.Entities.Abstract;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
@@ -117,6 +118,29 @@ public class EfRepositoryBase<TEntity, TEntityId, TContext>
         return await queryable.FirstOrDefaultAsync(predicate, cancellationToken);
     }
 
+    public async Task<IPaginate<TEntity>> GetListByDynamicAsync(
+        DynamicQuery dynamic,
+        Expression<Func<TEntity, bool>>? predicate = null,
+        Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include = null,
+        int index = 0,
+        int size = 10,
+        bool withDeleted = false,
+        bool enableTracking = true,
+        CancellationToken cancellationToken = default
+    )
+    {
+        IQueryable<TEntity> queryable = Query().ToDynamic(dynamic);
+        if (!enableTracking)
+            queryable = queryable.AsNoTracking();
+        if (include != null)
+            queryable = include(queryable);
+        if (withDeleted)
+            queryable = queryable.IgnoreQueryFilters();
+        if (predicate != null)
+            queryable = queryable.Where(predicate);
+        return await queryable.ToPaginateAsync(index, size, from: 0, cancellationToken);
+    }
+
     public async Task<bool> AnyAsync(
         Expression<Func<TEntity, bool>>? predicate = null,
         bool withDeleted = false,
@@ -223,6 +247,28 @@ public class EfRepositoryBase<TEntity, TEntityId, TContext>
         if (size != 0)
             return queryable.ToPaginate(index, size, from: 0);
         return queryable.ToPaginate(index, queryable.Count(), from: 0);
+    }
+
+    public IPaginate<TEntity> GetListByDynamic(
+        DynamicQuery dynamic,
+        Expression<Func<TEntity, bool>>? predicate = null,
+        Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include = null,
+        int index = 0,
+        int size = 10,
+        bool withDeleted = false,
+        bool enableTracking = true
+    )
+    {
+        IQueryable<TEntity> queryable = Query().ToDynamic(dynamic);
+        if (!enableTracking)
+            queryable = queryable.AsNoTracking();
+        if (include != null)
+            queryable = include(queryable);
+        if (withDeleted)
+            queryable = queryable.IgnoreQueryFilters();
+        if (predicate != null)
+            queryable = queryable.Where(predicate);
+        return queryable.ToPaginate(index, size);
     }
 
     public bool Any(
