@@ -1,6 +1,6 @@
 using AutoMapper;
 using Core.Entities.Concrete;
-using Core.Entities.Dtos;
+using Entities.Dtos;
 
 namespace Business.Profiles;
 

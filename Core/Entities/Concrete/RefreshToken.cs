@@ -22,6 +22,7 @@ public class RefreshToken : Entity<int>
     }
 
     public RefreshToken(int userId, string token, DateTime expires, string createdByIp)
+        : this()
     {
         UserId = userId;
         Token = token;

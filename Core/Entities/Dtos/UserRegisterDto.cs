@@ -18,6 +18,7 @@ public class UserRegisterDto : IDto
     }
 
     public UserRegisterDto(string email, string password, string firstName, string lastName)
+        : this()
     {
         Email = email;
         Password = password;

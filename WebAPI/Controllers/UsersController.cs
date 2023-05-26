@@ -1,5 +1,5 @@
 using Business.Abstract;
-using Core.Entities.Dtos;
+using Entities.Dtos;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers;
@@ -16,7 +16,7 @@ public class UsersController : BaseController
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetDetails()
+    public async Task<IActionResult> GetFromAuth()
     {
         UserGetByIdDto userDto = await _userService.GetByIdDtoAsync(getUserIdFromRequest());
         return Ok(userDto);

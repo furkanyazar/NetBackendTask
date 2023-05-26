@@ -5,9 +5,9 @@ using Business.Rules.Business;
 using Business.Rules.Validation.Users;
 using Core.Aspects.Validation;
 using Core.Entities.Concrete;
-using Core.Entities.Dtos;
 using Core.Utilities.Security.Hashing;
 using DataAccess.Abstract;
+using Entities.Dtos;
 
 namespace Business.Concrete;
 
@@ -31,6 +31,7 @@ public class UserManager : IUserService
         return user!;
     }
 
+    [SecuredOperation("logged")]
     public async Task<UserGetByIdDto> GetByIdDtoAsync(int id)
     {
         User? user = await _userDal.GetAsync(c => c.Id == id);

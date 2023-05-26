@@ -1,6 +1,6 @@
 using Core.Entities.Abstract;
 
-namespace Core.Entities.Dtos;
+namespace Entities.Dtos;
 
 public class UpdateUserDto : IDto
 {
@@ -9,9 +9,15 @@ public class UpdateUserDto : IDto
     public string FirstName { get; set; }
     public string LastName { get; set; }
 
-    public UpdateUserDto() { }
+    public UpdateUserDto()
+    {
+        Email = string.Empty;
+        FirstName = string.Empty;
+        LastName = string.Empty;
+    }
 
     public UpdateUserDto(string email, string? password, string firstName, string lastName)
+        : this()
     {
         Email = email;
         Password = password;

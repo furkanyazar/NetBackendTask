@@ -14,6 +14,7 @@ public class UserLoginDto : IDto
     }
 
     public UserLoginDto(string email, string password)
+        : this()
     {
         Email = email;
         Password = password;
