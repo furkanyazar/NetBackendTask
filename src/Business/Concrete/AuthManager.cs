@@ -71,7 +71,7 @@ public class AuthManager : IAuthService
     [ValidationAspect(typeof(UserRegisterDtoValidator))]
     public async Task<User> RegisterAsync(UserRegisterDto userRegisterDto)
     {
-        await _authBusinessRules.UserEmailShouldBeNotExists(userRegisterDto.Email);
+        await _authBusinessRules.UserMailShouldBeNotExistsWhenInsert(userRegisterDto.Email);
 
         HashingHelper.CreatePasswordHash(userRegisterDto.Password, out byte[] passwordHash, out byte[] passwordSalt);
         User newUser =

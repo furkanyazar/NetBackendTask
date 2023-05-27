@@ -9,9 +9,9 @@
       "type": "coreclr",
       "request": "launch",
       "preLaunchTask": "build",
-      "program": "${workspaceFolder}/WebAPI/bin/Debug/net6.0/WebAPI.dll",
+      "program": "${workspaceFolder}/src/WebAPI/bin/Debug/net6.0/WebAPI.dll",
       "args": [],
-      "cwd": "${workspaceFolder}/WebAPI",
+      "cwd": "${workspaceFolder}/src/WebAPI",
       "stopAtEntry": false,
       "serverReadyAction": {
         "action": "openExternally",

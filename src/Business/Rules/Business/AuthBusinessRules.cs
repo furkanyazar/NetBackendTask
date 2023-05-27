@@ -30,7 +30,7 @@ public class AuthBusinessRules : BaseBusinessRules
         return Task.CompletedTask;
     }
 
-    public async Task UserEmailShouldBeNotExists(string email)
+    public async Task UserMailShouldBeNotExistsWhenInsert(string email)
     {
         bool doesExists = await _userDal.AnyAsync(c => c.Email == email, enableTracking: false);
         if (doesExists)

@@ -29,7 +29,7 @@ public class ProductManager : IProductService
     [ValidationAspect(typeof(AddProductDtoValidator))]
     public async Task<AddedProductDto> AddAsync(int userId, AddProductDto addProductDto)
     {
-        await _productBusinessRules.ProductNameShouldNotExistsWhenInsert(userId, addProductDto.Name);
+        await _productBusinessRules.ProductNameShouldBeNotExistsWhenInsert(userId, addProductDto.Name);
         Product newProduct = _mapper.Map<Product>(addProductDto);
         newProduct.UserId = userId;
         Product addedProduct = await _productDal.AddAsync(newProduct);
@@ -82,7 +82,7 @@ public class ProductManager : IProductService
         Product? product = await _productDal.GetAsync(c => c.Id == updateProductDto.Id);
         await _productBusinessRules.ProductShouldBeExistsWhenSelected(product);
         await _productBusinessRules.ProductShouldBeYoursWhenSelected(userId, product!);
-        await _productBusinessRules.ProductNameShouldNotExistsWhenUpdate(
+        await _productBusinessRules.ProductNameShouldBeNotExistsWhenUpdate(
             product!.Id,
             product.UserId,
             updateProductDto.Name

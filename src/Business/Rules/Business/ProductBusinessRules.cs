@@ -29,14 +29,14 @@ public class ProductBusinessRules : BaseBusinessRules
         return Task.CompletedTask;
     }
 
-    public async Task ProductNameShouldNotExistsWhenInsert(int userId, string name)
+    public async Task ProductNameShouldBeNotExistsWhenInsert(int userId, string name)
     {
         bool doesExists = await _productDal.AnyAsync(c => c.UserId == userId && c.Name == name, enableTracking: false);
         if (doesExists)
             throw new BusinessException(ProductMessages.ProductNameAlreadyExists);
     }
 
-    public async Task ProductNameShouldNotExistsWhenUpdate(int id, int userId, string name)
+    public async Task ProductNameShouldBeNotExistsWhenUpdate(int id, int userId, string name)
     {
         bool doesExists = await _productDal.AnyAsync(
             c => c.Id != id && c.UserId == userId && c.Name == name,

@@ -46,8 +46,9 @@ public class UserManager : IUserService
     {
         User? user = await _userDal.GetAsync(c => c.Id == id);
         await _userBusinessRules.UserShouldBeExistsWhenSelected(user);
+        await _userBusinessRules.UserMailShouldBeNotExistsWhenUpdate(user!.Id, updateUserDto.Email);
 
-        user!.FirstName = updateUserDto.FirstName;
+        user.FirstName = updateUserDto.FirstName;
         user.LastName = updateUserDto.LastName;
         user.Email = updateUserDto.Email;
 
