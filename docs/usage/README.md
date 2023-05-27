@@ -60,15 +60,15 @@ Closed endpoints require a valid JWT token to be included in the header of the r
 
 ### Users
 
-- [GetFromAuth](auth/getFromAuth.md) : `GET /api/Users`
-- [Update](auth/update.md) : `PUT /api/Users`
+- [GetFromAuth](users/getFromAuth.md) : `GET /api/Users`
+- [Update](users/update.md) : `PUT /api/Users`
 
 ### Products
 
-- [Add](auth/add.md) : `POST /api/Products`
-- [Delete](auth/delete.md) : `DELETE /api/Products`
-- [GetById](auth/getById.md) : `GET /api/Products/{id}`
-- [GetList](auth/getList.md) : `GET /api/Products`
-- [Update](auth/update.md) : `PUT /api/Products`
+- [Add](products/add.md) : `POST /api/Products`
+- [Delete](products/delete.md) : `DELETE /api/Products`
+- [GetById](products/getById.md) : `GET /api/Products/{id}`
+- [GetList](products/getList.md) : `GET /api/Products`
+- [Update](products/update.md) : `PUT /api/Products`
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>

@@ -62,7 +62,7 @@ Used to update a product owned by user.
 }
 ```
 
-#### Or
+### Or
 
 **Condition**: If product not found.
 
@@ -80,7 +80,7 @@ Used to update a product owned by user.
 }
 ```
 
-#### Or
+### Or
 
 **Condition**: If product isn't user's.
 
@@ -98,7 +98,7 @@ Used to update a product owned by user.
 }
 ```
 
-#### Or
+### Or
 
 **Condition**: If user not authorized.
 
@@ -116,7 +116,7 @@ Used to update a product owned by user.
 }
 ```
 
-#### Or
+### Or
 
 **Condition**: Otherwise.
 

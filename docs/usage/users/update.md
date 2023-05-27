@@ -13,7 +13,7 @@ Used to get a JWT token for a registered user.
 ```json
 {
   "email": "string",
-  "password?": "string",
+  "password?": "string", // not required
   "firstName": "string",
   "lastName": "string"
 }
@@ -24,7 +24,7 @@ Used to get a JWT token for a registered user.
 ```json
 {
   "email": "new-contact@furkanyazar.dev",
-  "password": null,
+  "password": null, // fill to change
   "firstName": "Furkan",
   "lastName": "Yazar"
 }
@@ -62,7 +62,7 @@ Used to get a JWT token for a registered user.
 }
 ```
 
-#### Or
+### Or
 
 **Condition**: If user not authorized.
 
@@ -80,7 +80,7 @@ Used to get a JWT token for a registered user.
 }
 ```
 
-#### Or
+### Or
 
 **Condition**: Otherwise.
 

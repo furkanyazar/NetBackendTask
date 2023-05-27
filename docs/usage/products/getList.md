@@ -2,7 +2,7 @@
 
 Used to get list products owned by user.
 
-**URL**: `/api/Products?PageIndex=0&PageSize=10&name=`
+**URL**: `/api/Products?PageIndex=0&PageSize=10&name=prod`
 
 **URL Parameters**:
 
@@ -67,7 +67,7 @@ Used to get list products owned by user.
 }
 ```
 
-#### Or
+### Or
 
 **Condition**: Otherwise.
 

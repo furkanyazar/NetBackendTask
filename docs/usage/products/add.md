@@ -1,4 +1,4 @@
-# Update
+# Add
 
 Used to add a new product.
 
@@ -61,7 +61,7 @@ Used to add a new product.
 }
 ```
 
-#### Or
+### Or
 
 **Condition**: If user not authorized.
 
@@ -79,7 +79,7 @@ Used to add a new product.
 }
 ```
 
-#### Or
+### Or
 
 **Condition**: Otherwise.
 

@@ -11,7 +11,7 @@ Used to revoke refresh token for a logged user.
 **Data constraints**
 
 ```json
-"string?"
+"string?" // refresh token is not required
 ```
 
 **Data example**
@@ -42,7 +42,7 @@ Used to revoke refresh token for a logged user.
 }
 ```
 
-#### Or
+### Or
 
 **Condition**: Otherwise.
 

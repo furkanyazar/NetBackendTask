@@ -40,7 +40,7 @@ Used to get a JWT token for a registered user.
 }
 ```
 
-#### Or
+### Or
 
 **Condition**: Otherwise.
 

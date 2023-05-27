@@ -43,7 +43,7 @@ Used to get a JWT token for a registered user.
 
 **Condition**: If email is wrong.
 
-**Code**: `400 BAD REQUEST`
+**Code**: `404 NOT FOUND`
 
 **Content**:
 
@@ -57,7 +57,7 @@ Used to get a JWT token for a registered user.
 }
 ```
 
-#### Or
+### Or
 
 **Condition**: If password is wrong.
 
@@ -75,7 +75,7 @@ Used to get a JWT token for a registered user.
 }
 ```
 
-#### Or
+### Or
 
 **Condition**: Otherwise.
 

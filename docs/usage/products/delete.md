@@ -46,7 +46,7 @@ Used to delete a product owned by user.
 }
 ```
 
-#### Or
+### Or
 
 **Condition**: If product isn't user's.
 
@@ -64,7 +64,7 @@ Used to delete a product owned by user.
 }
 ```
 
-#### Or
+### Or
 
 **Condition**: If user not authorized.
 
@@ -82,7 +82,7 @@ Used to delete a product owned by user.
 }
 ```
 
-#### Or
+### Or
 
 **Condition**: Otherwise.
 

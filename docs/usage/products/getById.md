@@ -44,7 +44,7 @@ Used to get a product by id owned by user.
 }
 ```
 
-#### Or
+### Or
 
 **Condition**: If product isn't user's.
 
@@ -62,7 +62,7 @@ Used to get a product by id owned by user.
 }
 ```
 
-#### Or
+### Or
 
 **Condition**: If user not authorized.
 
@@ -80,7 +80,7 @@ Used to get a product by id owned by user.
 }
 ```
 
-#### Or
+### Or
 
 **Condition**: Otherwise.
 
