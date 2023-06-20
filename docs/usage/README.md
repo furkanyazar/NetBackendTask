@@ -3,7 +3,7 @@
 <div align="center">
   <h3 align="center">NetBackendTask Usage Documentation</h3>
   <p align="center">
-    Eralp .NET Backend Developer Task Project Usage Documentation
+    .NET Backend Developer Task Project Usage Documentation
   </p>
 </div>
 

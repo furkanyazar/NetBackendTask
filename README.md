@@ -3,7 +3,7 @@
 <div align="center">
   <h3 align="center">NetBackendTask</h3>
   <p align="center">
-    Eralp .NET Backend Developer Task Project
+    .NET Backend Developer Task Project
   </p>
 </div>
 
