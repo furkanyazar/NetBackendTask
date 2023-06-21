@@ -63,7 +63,7 @@ Follow these simple steps to get a local copy up and running.
    ```
 5. Run
    ```sh
-   dotnet watch run --project src/WebAPI
+   dotnet run --project src/WebAPI
    ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
