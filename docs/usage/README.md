@@ -3,7 +3,7 @@
 <div align="center">
   <h3 align="center">NetCoreBackend Usage Documentation</h3>
   <p align="center">
-    .NET Backend Developer Task Project Usage Documentation
+    .NET Backend Developer Project Usage Documentation
   </p>
 </div>
 

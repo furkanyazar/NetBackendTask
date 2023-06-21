@@ -3,7 +3,7 @@
 <div align="center">
   <h3 align="center">NetCoreBackend</h3>
   <p align="center">
-    .NET Backend Developer Task Project
+    .NET Backend Developer Project
   </p>
 </div>
 
