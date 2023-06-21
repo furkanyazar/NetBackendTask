@@ -1,7 +1,7 @@
 <a name="readme-top"></a>
 
 <div align="center">
-  <h3 align="center">NetBackendTask</h3>
+  <h3 align="center">NetCoreBackend</h3>
   <p align="center">
     .NET Backend Developer Task Project
   </p>
@@ -44,16 +44,16 @@ Follow these simple steps to get a local copy up and running.
 
 1. Clone the repo
    ```sh
-   git clone https://github.com/furkanyazar/NetBackendTask
+   git clone https://github.com/furkanyazar/NetCoreBackend
    ```
 2. Change directory
    ```sh
-   cd NetBackendTask
+   cd NetCoreBackend
    ```
-3. Check the BaseDb connection string in `src/WebAPI/appsettings.json`
+3. Check the BaseDb connection string in `src/WebAPI/appsettings.Development.json`
    ```json
    "ConnectionStrings": {
-     "BaseDb": "server=localhost;User Id=root;password=;database=NetBackendTask;"
+     "BaseDb": "server=localhost;User Id=root;password=;database=NetCoreBackend;"
    }
    ```
 4. Update database
@@ -82,6 +82,6 @@ Follow these simple steps to get a local copy up and running.
 
 - Furkan Yazar - [furkanyazar.dev](https://furkanyazar.dev/) - [contact@furkanyazar.dev](mailto:contact@furkanyazar.dev)
 
-Project Link: [https://github.com/furkanyazar/NetBackendTask](https://github.com/furkanyazar/NetBackendTask)
+Project Link: [https://github.com/furkanyazar/NetCoreBackend](https://github.com/furkanyazar/NetCoreBackend)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>

@@ -1,7 +1,7 @@
 <a name="readme-top"></a>
 
 <div align="center">
-  <h3 align="center">NetBackendTask Usage Documentation</h3>
+  <h3 align="center">NetCoreBackend Usage Documentation</h3>
   <p align="center">
     .NET Backend Developer Task Project Usage Documentation
   </p>
@@ -33,7 +33,7 @@
 
 ## About The Usage Documentation
 
-This usage documentation is for the [NetBackendTask](https://github.com/furkanyazar/NetBackendTask) project and it is a REST API project. In this documentation you will see how some endpoints work.
+This usage documentation is for the [NetCoreBackend](https://github.com/furkanyazar/NetCoreBackend) project and it is a REST API project. In this documentation you will see how some endpoints work.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
